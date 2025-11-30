@@ -1,6 +1,6 @@
 Table Salon{
   id uuid [pk, default: `uuid_generate_v4()`]
-  owner_id uuid [pk, ref: > Owner.id]
+  owner_id uuid [ref: > Owner.id]
   name varchar
   address varchar
   is_subscription_active boolean
@@ -8,7 +8,7 @@ Table Salon{
 }
 
 Table Owner {
-  id uuid [pk, ref: > User.id]
+  id uuid [ref: > User.id]
 }
 
 Table User {
@@ -21,17 +21,17 @@ Table User {
 }
 
 Table Stylist {
-  id uuid [pk, ref: > User.id]
+  id uuid [ref: > User.id]
   salon_id uuid [ref: > Salon.id]
 }
 
 Table Cashier {
-  id uuid [pk, ref: > User.id]
+  id uuid [ref: > User.id]
   salon_id uuid [ref: > Salon.id]
 }
 
 Table SuperAdmin {
-  id uuid [pk, ref: > User.id]
+  id uuid [ref: > User.id]
   // System-level role: can activate/deactivate salon subscriptions
 }
 
