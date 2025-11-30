@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "darkMode": true,
+  "gridEnabling": false,
+  "detailLevel": "All",
+  "tablePositions": [
+    {
+      "name": "Salon",
+      "schemaName": "public",
+      "x": 151.131162279583,
+      "y": -477.31205629078096
+    },
+    {
+      "name": "Owner",
+      "schemaName": "public",
+      "x": 479.2966314738341,
+      "y": -628.3890498949804
+    },
+    {
+      "name": "User",
+      "schemaName": "public",
+      "x": 686.1367239338379,
+      "y": -496.2653049580438
+    },
+    {
+      "name": "Stylist",
+      "schemaName": "public",
+      "x": 884.775114232694,
+      "y": -248.83427577851188
+    },
+    {
+      "name": "Cashier",
+      "schemaName": "public",
+      "x": 271.61764727569107,
+      "y": -203.1989206750062
+    },
+    {
+      "name": "SuperAdmin",
+      "schemaName": "public",
+      "x": 709.6484426838379,
+      "y": -628.3890498949804
+    },
+    {
+      "name": "Appointment",
+      "schemaName": "public",
+      "x": 647.7175344807129,
+      "y": -103.20220346572489
+    }
+  ],
+  "tableGroupCollapseStates": [],
+  "stickyNoteLayouts": [],
+  "referencePaths": []
+}

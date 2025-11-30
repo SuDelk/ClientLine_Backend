@@ -1,0 +1,50 @@
+Table Salon{
+  id uuid [pk]
+  owner_id uuid [pk, ref: > Owner.id]
+  name varchar
+  address varchar
+  is_subscription_active boolean
+  created_at timestamp 
+}
+
+Table Owner {
+  id uuid [pk, ref: > User.id]
+}
+
+Table User {
+  id uuid [pk]
+  name varchar
+  email varchar
+  phone varchar
+  role varchar // "superadmin", "owner", "cashier", "stylist", "user"
+  created_at timestamp
+}
+
+Table Stylist {
+  id uuid [pk, ref: > User.id]
+  salon_id uuid [ref: > Salon.id]
+}
+
+Table Cashier {
+  id uuid [pk, ref: > User.id]
+  salon_id uuid [ref: > Salon.id]
+}
+
+Table SuperAdmin {
+  id uuid [pk, ref: > User.id]
+  // System-level role: can activate/deactivate salon subscriptions
+}
+
+Table Appointment {
+  id uuid [pk]
+  client_name varchar
+  client_phone varchar
+  start_time datetime
+  approximate_allocated_time int // minutes, default 45
+  stylist_id uuid [ref: > Stylist.id]
+  salon_id uuid [ref: > Salon.id]
+  service_type varchar // hair, beard, tattoo, makeup, dress-up, etc.
+  completed boolean
+  cost decimal
+  created_at timestamp
+}
