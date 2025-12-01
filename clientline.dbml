@@ -1,108 +1,53 @@
-Table Salon{
-  id uuid [pk, default: `uuid_generate_v4()`]
-  owner_id uuid [ref: > Owner.id]
-  name varchar
-  address varchar
+Table organizations {
+  id integer [primary key, increment]
+  name varchar [not null]
+  email varchar [unique, not null]
   phone varchar
-  is_subscription_active boolean
-  timezone varchar [default: 'UTC']
-  created_at timestamp 
-}
-
-Table Owner {
-  id uuid [ref: > User.id]
-}
-
-Table User {
-  id uuid [pk, default: `uuid_generate_v4()`]
-  name varchar
-  email varchar
-  phone varchar
-  role varchar // "superadmin", "owner", "cashier", "stylist", "client"
-  created_at timestamp
-}
-
-// Junction table for user-salon relationships
-Table UserSalon {
-  id uuid [pk, default: `uuid_generate_v4()`]
-  user_id uuid [ref: > User.id]
-  salon_id uuid [ref: > Salon.id]
-  role varchar // "owner", "stylist", "cashier"
+  address text
   is_active boolean [default: true]
-  created_at timestamp
+  created_at timestamp [default: `now()`]
 }
 
-Table Stylist {
-  id uuid [ref: > User.id]
-  specialization varchar // "hair_stylist", "tattoo_artist", "nail_artist", "makeup_artist", "barber", "massage_therapist"
-  experience_years int
-  hourly_rate decimal
-}
-
-Table Cashier {
-  id uuid [ref: > User.id]
-}
-
-Table SuperAdmin {
-  id uuid [ref: > User.id]
-  // System-level role: can activate/deactivate salon subscriptions
-}
-
-// Stylist working hours and availability
-Table StylistSchedule {
-  id uuid [pk, default: `uuid_generate_v4()`]
-  stylist_id uuid [ref: > Stylist.id]
-  salon_id uuid [ref: > Salon.id]
-  day_of_week int // 0=Sunday, 1=Monday, ..., 6=Saturday
-  start_time time
-  end_time time
-  is_available boolean [default: true]
-  created_at timestamp
-}
-
-// Time slots when stylist is not available
-Table StylistUnavailability {
-  id uuid [pk, default: `uuid_generate_v4()`]
-  stylist_id uuid [ref: > Stylist.id]
-  start_datetime datetime
-  end_datetime datetime
-  reason varchar // "break", "lunch", "personal", "vacation"
-  is_recurring boolean [default: false]
-  created_at timestamp
-}
-
-Table ServiceType {
-  id uuid [pk, default: `uuid_generate_v4()`]
-  name varchar
-  specialization varchar // matches Stylist.specialization
-  duration_minutes int
-  base_price decimal
-  salon_id uuid [ref: > Salon.id]
-  is_active boolean [default: true]
-  created_at timestamp
-}
-
-Table Client {
-  id uuid [pk, default: `uuid_generate_v4()`]
-  name varchar
+Table users {
+  id integer [primary key, increment]
+  organization_id integer [ref: > organizations.id, not null]
+  name varchar [not null]
+  email varchar [unique, not null]
   phone varchar
-  email varchar
-  notes text
-  created_at timestamp
+  role varchar [not null, note: 'admin, manager, staff, client']
+  is_active boolean [default: true]
+  created_at timestamp [default: `now()`]
 }
 
-Table Appointment {
-  id uuid [pk, default: `uuid_generate_v4()`]
-  client_id uuid [ref: > Client.id]
-  stylist_id uuid [ref: > Stylist.id]
-  salon_id uuid [ref: > Salon.id]
-  service_type_id uuid [ref: > ServiceType.id]
-  start_time datetime
-  end_time datetime
-  duration_minutes int [default: 45]
-  status varchar [default: 'scheduled'] // "scheduled", "confirmed", "in_progress", "completed", "cancelled", "no_show"
-  cost decimal
+Table services {
+  id integer [primary key, increment]
+  organization_id integer [ref: > organizations.id, not null]
+  name varchar [not null]
+  description text
+  duration integer [note: 'minutes']
+  price decimal(10,2)
+  is_active boolean [default: true]
+  created_at timestamp [default: `now()`]
+}
+
+Table appointments {
+  id integer [primary key, increment]
+  organization_id integer [ref: > organizations.id, not null]
+  client_id integer [ref: > users.id, not null]
+  staff_id integer [ref: > users.id, not null]
+  service_id integer [ref: > services.id, not null]
+  appointment_date timestamp [not null]
+  status varchar [default: 'scheduled', note: 'scheduled, completed, cancelled, no_show']
   notes text
-  created_at timestamp
-  updated_at timestamp
+  created_at timestamp [default: `now()`]
+}
+
+Table payments {
+  id integer [primary key, increment]
+  organization_id integer [ref: > organizations.id, not null]
+  appointment_id integer [ref: > appointments.id, not null]
+  amount decimal(10,2) [not null]
+  payment_method varchar [note: 'cash, card, online']
+  status varchar [default: 'pending', note: 'pending, completed, failed, refunded']
+  created_at timestamp [default: `now()`]
 }

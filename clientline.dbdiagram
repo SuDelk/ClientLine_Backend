@@ -5,76 +5,34 @@
   "detailLevel": "All",
   "tablePositions": [
     {
-      "name": "Salon",
+      "name": "organizations",
       "schemaName": "public",
-      "x": 151.131162279583,
-      "y": -477.31205629078096
+      "x": 0,
+      "y": 50
     },
     {
-      "name": "Owner",
+      "name": "users",
       "schemaName": "public",
-      "x": 479.2966314738341,
-      "y": -628.3890498949804
+      "x": 296.1796875,
+      "y": 50
     },
     {
-      "name": "User",
+      "name": "services",
       "schemaName": "public",
-      "x": 686.1367239338379,
-      "y": -496.2653049580438
+      "x": 589.2744140625,
+      "y": 50
     },
     {
-      "name": "UserSalon",
+      "name": "appointments",
       "schemaName": "public",
-      "x": 151.131162279583,
-      "y": 362.7977965342751
+      "x": 882.369140625,
+      "y": 50
     },
     {
-      "name": "Stylist",
+      "name": "payments",
       "schemaName": "public",
-      "x": 884.775114232694,
-      "y": -248.83427577851188
-    },
-    {
-      "name": "Cashier",
-      "schemaName": "public",
-      "x": 271.61764727569107,
-      "y": -203.1989206750062
-    },
-    {
-      "name": "SuperAdmin",
-      "schemaName": "public",
-      "x": 709.6484426838379,
-      "y": -628.3890498949804
-    },
-    {
-      "name": "StylistSchedule",
-      "schemaName": "public",
-      "x": 398.141416185833,
-      "y": 362.7977965342751
-    },
-    {
-      "name": "StylistUnavailability",
-      "schemaName": "public",
-      "x": 652.675595873333,
-      "y": 362.7977965342751
-    },
-    {
-      "name": "ServiceType",
-      "schemaName": "public",
-      "x": 920.982236498333,
-      "y": 362.7977965342751
-    },
-    {
-      "name": "Client",
-      "schemaName": "public",
-      "x": 151.131162279583,
-      "y": 636.7977965342751
-    },
-    {
-      "name": "Appointment",
-      "schemaName": "public",
-      "x": 647.7175344807129,
-      "y": -103.20220346572489
+      "x": 0,
+      "y": 356
     }
   ],
   "tableGroupCollapseStates": [],
@@ -84,13 +42,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "Owner",
+      "firstTableName": "organizations",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "owner_id"
+        "organization_id"
       ],
-      "secondTableName": "Salon",
+      "secondTableName": "users",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
@@ -99,13 +57,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "User",
+      "firstTableName": "organizations",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "id"
+        "organization_id"
       ],
-      "secondTableName": "Owner",
+      "secondTableName": "services",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
@@ -114,13 +72,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "User",
+      "firstTableName": "organizations",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "user_id"
+        "organization_id"
       ],
-      "secondTableName": "UserSalon",
+      "secondTableName": "appointments",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
@@ -129,133 +87,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "Salon",
-      "firstSchemaName": "public",
-      "firstRelation": "1",
-      "secondFieldNames": [
-        "salon_id"
-      ],
-      "secondTableName": "UserSalon",
-      "secondSchemaName": "public",
-      "secondRelation": "*",
-      "checkPoints": []
-    },
-    {
-      "firstFieldNames": [
-        "id"
-      ],
-      "firstTableName": "User",
-      "firstSchemaName": "public",
-      "firstRelation": "1",
-      "secondFieldNames": [
-        "id"
-      ],
-      "secondTableName": "Stylist",
-      "secondSchemaName": "public",
-      "secondRelation": "*",
-      "checkPoints": []
-    },
-    {
-      "firstFieldNames": [
-        "id"
-      ],
-      "firstTableName": "User",
-      "firstSchemaName": "public",
-      "firstRelation": "1",
-      "secondFieldNames": [
-        "id"
-      ],
-      "secondTableName": "Cashier",
-      "secondSchemaName": "public",
-      "secondRelation": "*",
-      "checkPoints": []
-    },
-    {
-      "firstFieldNames": [
-        "id"
-      ],
-      "firstTableName": "User",
-      "firstSchemaName": "public",
-      "firstRelation": "1",
-      "secondFieldNames": [
-        "id"
-      ],
-      "secondTableName": "SuperAdmin",
-      "secondSchemaName": "public",
-      "secondRelation": "*",
-      "checkPoints": []
-    },
-    {
-      "firstFieldNames": [
-        "id"
-      ],
-      "firstTableName": "Stylist",
-      "firstSchemaName": "public",
-      "firstRelation": "1",
-      "secondFieldNames": [
-        "stylist_id"
-      ],
-      "secondTableName": "StylistSchedule",
-      "secondSchemaName": "public",
-      "secondRelation": "*",
-      "checkPoints": []
-    },
-    {
-      "firstFieldNames": [
-        "id"
-      ],
-      "firstTableName": "Salon",
-      "firstSchemaName": "public",
-      "firstRelation": "1",
-      "secondFieldNames": [
-        "salon_id"
-      ],
-      "secondTableName": "StylistSchedule",
-      "secondSchemaName": "public",
-      "secondRelation": "*",
-      "checkPoints": []
-    },
-    {
-      "firstFieldNames": [
-        "id"
-      ],
-      "firstTableName": "Stylist",
-      "firstSchemaName": "public",
-      "firstRelation": "1",
-      "secondFieldNames": [
-        "stylist_id"
-      ],
-      "secondTableName": "StylistUnavailability",
-      "secondSchemaName": "public",
-      "secondRelation": "*",
-      "checkPoints": []
-    },
-    {
-      "firstFieldNames": [
-        "id"
-      ],
-      "firstTableName": "Salon",
-      "firstSchemaName": "public",
-      "firstRelation": "1",
-      "secondFieldNames": [
-        "salon_id"
-      ],
-      "secondTableName": "ServiceType",
-      "secondSchemaName": "public",
-      "secondRelation": "*",
-      "checkPoints": []
-    },
-    {
-      "firstFieldNames": [
-        "id"
-      ],
-      "firstTableName": "Client",
+      "firstTableName": "users",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
         "client_id"
       ],
-      "secondTableName": "Appointment",
+      "secondTableName": "appointments",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
@@ -264,13 +102,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "Stylist",
+      "firstTableName": "users",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "stylist_id"
+        "staff_id"
       ],
-      "secondTableName": "Appointment",
+      "secondTableName": "appointments",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
@@ -279,13 +117,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "Salon",
+      "firstTableName": "services",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "salon_id"
+        "service_id"
       ],
-      "secondTableName": "Appointment",
+      "secondTableName": "appointments",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
@@ -294,13 +132,28 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "ServiceType",
+      "firstTableName": "organizations",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "service_type_id"
+        "organization_id"
       ],
-      "secondTableName": "Appointment",
+      "secondTableName": "payments",
+      "secondSchemaName": "public",
+      "secondRelation": "*",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "appointments",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "appointment_id"
+      ],
+      "secondTableName": "payments",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
