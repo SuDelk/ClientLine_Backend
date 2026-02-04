@@ -1,13 +1,26 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey, Enum as SQLEnum
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from pydantic import BaseModel, EmailStr, Field
 from datetime import datetime
 from typing import Optional
 from passlib.context import CryptContext
+from enum import Enum
 from ..database import Base
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+# Enum for userRoleTypes
+class UserRoleType(str, Enum):
+    # For the main admin of the system
+    SUPER_ADMIN = "superAdmin"
+    ADMIN = "admin"
+    
+    # For users with specific permissions
+    BUSINESS_OWNER = "businessOwner"
+    BUSINESS_MANAGER = "businessManager"
+    STAFF = "staff"
+    CLIENT = "client"
 
 class User(Base):
     __tablename__ = "users"
@@ -18,6 +31,7 @@ class User(Base):
     email = Column(String(255), unique=True, index=True, nullable=False)
     password_hash = Column(String(255), nullable=False)
     phone = Column(String(20))
+    roleType = Column(SQLEnum(UserRoleType), nullable=False, default=UserRoleType.STAFF)
     role = Column(String(50), nullable=True)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
