@@ -50,7 +50,12 @@ class UserController:
             
             UserController._validate_organization(user_data.organization_id, db)
             
-            db_user = User(**user_data.model_dump())
+            # Create user with hashed password
+            user_dict = user_data.model_dump()
+            password = user_dict.pop('password')
+            db_user = User(**user_dict)
+            db_user.set_password(password)
+            
             db.add(db_user)
             db.commit()
             db.refresh(db_user)
@@ -107,7 +112,13 @@ class UserController:
             
             UserController._validate_organization(user_data.organization_id, db)
             
-            for field, value in user_data.model_dump(exclude_unset=True).items():
+            # Handle password update if provided
+            user_dict = user_data.model_dump(exclude_unset=True)
+            if 'password' in user_dict:
+                password = user_dict.pop('password')
+                db_user.set_password(password)
+            
+            for field, value in user_dict.items():
                 setattr(db_user, field, value)
             
             db.commit()
