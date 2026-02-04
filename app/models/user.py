@@ -31,7 +31,7 @@ class User(Base):
     email = Column(String(255), unique=True, index=True, nullable=False)
     password_hash = Column(String(255), nullable=False)
     phone = Column(String(20))
-    roleType = Column(SQLEnum(UserRoleType), nullable=False, default=UserRoleType.STAFF)
+    roleType = Column(String(50), nullable=False, default=UserRoleType.STAFF.value)
     role = Column(String(50), nullable=True)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -50,6 +50,7 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str = Field(..., min_length=6)
     phone: Optional[str] = None
+    roleType: Optional[UserRoleType] = None
     role: Optional[str] = None
 
 class UserUpdate(BaseModel):
@@ -58,6 +59,7 @@ class UserUpdate(BaseModel):
     email: Optional[EmailStr] = None
     password: Optional[str] = Field(None, min_length=6)
     phone: Optional[str] = None
+    roleType: Optional[UserRoleType] = None
     role: Optional[str] = None
     is_active: Optional[bool] = None
 
@@ -67,6 +69,7 @@ class UserResponse(BaseModel):
     name: str
     email: str
     phone: Optional[str]
+    roleType: Optional[str]
     role: Optional[str]
     is_active: bool
     created_at: datetime
